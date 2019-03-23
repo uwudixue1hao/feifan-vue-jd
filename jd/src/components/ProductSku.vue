@@ -1,11 +1,14 @@
 <template>
-	<div class="sku mask" v-show="value" @click="$emit('input',false);">
+	<div class="sku mask" v-show="value" @click="close">
 		<transition name="slide">
 			<div class="main" v-show="value" @click.stop>
+
+				<span class="close-btn" @click="close"></span>
+
 				<div class="header">
 					<img src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/22674/37/11177/192926/5c8cdd05E09a553f4/877b6f05c03f2a60.jpg" alt="" />
 					<p class="price"> ￥<em>128.25</em> </p>
-					<p class="selected"><span>已选:</span> {{color[colorIndex]}} {{size[sizeIndex]}} </p>
+					<p class="selected"><span>已选:</span> {{color[colorIndex]}} {{size[sizeIndex]}} {{count}}件</p>
 				</div>
 				<div class="body">
 
@@ -25,9 +28,17 @@
 					</div>
 					<div class="sku-kind">
 						数量:
+
+						<div class="choose-count right">
+							<span class="minus" @click="count=count==1?1:--count;">-</span>
+							<span class="count" v-text="count"></span>
+							<span class="plus" @click="count++;">+</span>
+						</div>
 					</div>
 
 				</div>
+
+				<div class="btn-ok" @click="ok">确定</div>
 			</div>
 		</transition>
 	</div>
@@ -37,10 +48,11 @@
 	export default {
 		data() {
 			return {
-				color:['红色','黑色','白色','绿色','灰色'],
-				colorIndex:0,
-				size:['37','38','39','40','41','42'],
-				sizeIndex:0
+				color: ['红色', '黑色', '白色', '绿色', '灰色'],
+				colorIndex: 0,
+				size: ['37', '38', '39', '40', '41', '42'],
+				sizeIndex: 0,
+				count: 1
 			};
 		},
 		props: {
@@ -48,12 +60,20 @@
 				type: Boolean,
 				default: false
 			}
+		},
+		methods: {
+			close() {
+				this.$emit('input', false);
+			},
+			ok() {
+				this.$emit('ok', this.color[this.colorIndex], this.size[this.sizeIndex], this.count);
+			}
 		}
 	}
 </script>
 
 <style>
-	.mask {
+	.sku {
 		position: fixed;
 		top: 0;
 		bottom: 0;
@@ -61,6 +81,18 @@
 		right: 0;
 		background-color: rgba(0, 0, 0, .7);
 		z-index: 999999;
+	}
+	
+	.sku .close-btn {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 0.3rem;
+		height: 0.3rem;
+		padding: 0.2rem;
+		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaAgMAAADUJKRdAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURQAAAAAAAEdwTAAAAA+kCggAAAAEdFJOUyoFADPFB4o9AAAAbklEQVQI11WPoRXAIAxET1VVVLMFe8R1gWrWyQKIGJiiin26Qa88ThTz3yM/yQVb52tA/hg3rJB+wBNpF2KwnCsahRgVnYInkoIVMgZLZMtUyW5nmvS9TMbTf9T/8tSnOZq79mivciiXcir3uuMFX3BjVwgV70oAAAAASUVORK5CYII=) 50% no-repeat;
+		background-size: 0.22rem auto;
 	}
 	
 	.sku .header {
@@ -117,6 +149,7 @@
 	}
 	
 	.mask .sku-kind {
+		text-align: left;
 		font-size: 0.24rem;
 		color: #999;
 		margin: 0 0.2rem;
@@ -144,12 +177,36 @@
 		border-radius: 0.08rem;
 		color: #333;
 		background-color: #f7f7f7;
-		font-size: 0.28rem;
+		font-size: 0.3rem;
 	}
 	
 	.sku .sku-choose span.active {
 		background-color: #e4393c;
 		color: #fff;
+	}
+	
+	.sku .choose-count span {
+		display: inline-block;
+		position: relative;
+		max-width: 0.6rem;
+		min-width: 0.6rem;
+		height: 0.6rem;
+		line-height: 0.6rem;
+		background: #f7f7f7;
+		text-align: center;
+	}
+	
+	.sku .btn-ok {
+		height: 1rem;
+		line-height: 1rem;
+		color: #fff;
+		font-size: 0.32rem;
+		text-align: center;
+		background-color: #e4393c;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
 	}
 	
 	.sku .slide-enter {

@@ -5,14 +5,18 @@
 		<top-bar>
 
 			<ul class="flex top-nav">
-				<li class="flex-item" :class="{active:navIndex==index}" v-for="(item,index) in nav" :key="index" @click="navIndex=index">
+				<li class="flex-item" :class="{active:navIndex==index}" v-for="(item,index) in nav" :key="index" @click="scroll(index)">
 					<span v-text="item.title"></span>
 				</li>
 			</ul>
-
 		</top-bar>
-		<product-btn></product-btn>
 
+		<div ref="goods" style="height: 1500px;background-color: red;"></div>
+		<div ref="comment" style="height: 1002px;background-color: green;"></div>
+		<div ref="detail" style="height: 998px;background-color: blue;"></div>
+		<div ref="recommend" style="height: 1000px;background-color: yellow;"></div>
+
+		<product-btn></product-btn>
 	</div>
 
 </template>
@@ -26,15 +30,60 @@
 			return {
 				navIndex: 0,
 				nav: [{
-					title: '商品'
+					title: '商品',
+					top: 0
 				}, {
-					title: '评价'
+					title: '评价',
+					top: 0
 				}, {
-					title: '详情'
+					title: '详情',
+					top: 0
 				}, {
-					title: '推荐'
+					title: '推荐',
+					top: 0
 				}],
 			};
+		},
+		methods: {
+			scroll(index) {
+				this.navIndex = index;
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				// 动画次数
+				var count = 50;
+				// 步进值
+				var step = (this.nav[this.navIndex].top-scrollTop ) / count;
+				// 时间片
+				var timeOut = 10;
+				// 利用定时器实现一个动画
+				var t = setInterval(() => {
+					scrollTop += step;
+					document.documentElement.scrollTop = scrollTop;
+					document.body.scrollTop = scrollTop;
+					count--;
+					if(count <= 0) {
+						clearInterval(t);
+						this.navIndex = index;
+					}
+				}, timeOut);
+			}
+		},
+		created() {
+			window.onscroll = (e) => {
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				// 判断到底滚动到那一个元素的附近了
+				this.nav.forEach((item, index) => {
+					if(Math.abs(item.top - scrollTop) < 20) {
+						this.navIndex = index;
+					}
+				});
+
+			}
+		},
+		mounted() {
+			this.nav[0].top = this.$refs['goods'].offsetTop;
+			this.nav[1].top = this.$refs['comment'].offsetTop;
+			this.nav[2].top = this.$refs['detail'].offsetTop;
+			this.nav[3].top = this.$refs['recommend'].offsetTop;
 		},
 		components: {
 			TopBar,
@@ -45,6 +94,10 @@
 </script>
 
 <style>
+	.product {
+		width: 100%;
+	}
+	
 	.top-nav {
 		line-height: 0.9rem;
 		text-align: center;
