@@ -1,5 +1,5 @@
 {
-  "name": "m.jd.com",
+  "name": "jd",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "core-js": "^2.6.5",
     "swiper": "^4.5.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",

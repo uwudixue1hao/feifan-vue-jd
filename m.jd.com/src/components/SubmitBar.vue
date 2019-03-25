@@ -90,7 +90,7 @@
 		background-color: #fff;
 	}
 	
-	.mask {
+	.submit-bar .mask {
 		position: fixed;
 		top: 0;
 		bottom: 0;
@@ -99,7 +99,7 @@
 		background-color: rgba(0, 0, 0, .7);
 	}
 	
-	.mask .sku {
+	.submit-bar .mask .sku {
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -109,16 +109,16 @@
 		background-color: #fff;
 	}
 	
-	.sku .header {
+	.submit-bar .sku .header {
 		height: 1.4rem;
 		padding: 0 0 0.2rem 2.2rem;
 	}
 	
-	.sku .header p {
+	.submit-bar .sku .header p {
 		margin: 0;
 	}
 	
-	.sku .header img {
+	.submit-bar .sku .header img {
 		position: absolute;
 		left: 0.2rem;
 		top: -0.4rem;
@@ -127,7 +127,7 @@
 		height: 1.8rem;
 	}
 	
-	.sku .header .price {
+	.submit-bar .sku .header .price {
 		display: inline-block;
 		height: 0.8rem;
 		line-height: 0.8rem;
@@ -135,11 +135,11 @@
 		font-size: 0.2rem
 	}
 	
-	.sku .header .price em {
+	.submit-bar .sku .header .price em {
 		font-size: 0.32rem;
 	}
 	
-	.sku .header .prop {
+	.submit-bar .sku .header .prop {
 		word-break: break-all;
 		font-size: 0.24rem;
 		color: #333;
@@ -147,20 +147,20 @@
 		padding-right: 0.2rem;
 	}
 	
-	.sku .header .prop span {
+	.submit-bar .sku .header .prop span {
 		color: #999;
 	}
 	
-	.sku .body {
+	.submit-bar .sku .body {
 		box-sizing: border-box;
 		max-height: 7.8rm;
 		padding-bottom: 1rem;
 		overflow-y: auto;
 	}
 	
-	.sku .body .select {}
+	.submit-bar .sku .body .select {}
 	
-	.sku .body .select-title {
+	.submit-bar .sku .body .select-title {
 		font-size: 0.24rem;
 		color: #999;
 		margin: 0 0.2rem;
@@ -168,12 +168,12 @@
 		line-height: 0.8rem;
 	}
 	
-	.sku .body .select-item {
+	.submit-bar .sku .body .select-item {
 		overflow: hidden;
 		margin-bottom: 0.06rem;
 	}
 	
-	.sku .body .item {
+	.submit-bar .sku .body .item {
 		display: inline-block;
 		padding: 0 0.2rem;
 		min-width: 0.4rem;
@@ -191,12 +191,12 @@
 		font-size: 0.28rem
 	}
 	
-	.sku .body .item.active {
+	.submit-bar .sku .body .item.active {
 		background-color: #e4393c;
 		color: #fff;
 	}
 	
-	.sku .body .count span {
+	.submit-bar .sku .body .count span {
 		display: inline-block;
 		max-width: 0.6rem;
 		min-width: 0.6rem;
@@ -212,7 +212,7 @@
 		font-weight: 500;
 	}
 	
-	.sku .btn-ok {
+	.submit-bar .sku .btn-ok {
 		position: absolute;
 		width: 100%;
 		bottom: 0;
