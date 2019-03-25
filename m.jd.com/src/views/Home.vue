@@ -69,7 +69,7 @@
 
 <style>
 	body {
-		background-color: yellow!important;
+		/*background-color: yellow!important;*/
 	}
 	
 	#swiper-container {
