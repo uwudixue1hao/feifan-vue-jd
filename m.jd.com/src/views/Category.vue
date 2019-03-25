@@ -1,6 +1,19 @@
 <template>
 	<div id="category">
-		<top-bar></top-bar>
+		<top-bar>
+
+			<div class="search-form">
+				<div class="input">
+					<span class="icon-search">
+						
+					</span>
+					
+					<a href="">搜索内容</a>
+
+				</div>
+			</div>
+
+		</top-bar>
 
 		<div class="container flex">
 
@@ -13,9 +26,9 @@
 			</div>
 
 			<div class="content flex-item">
-				
+
 				<Content></Content>
-				
+
 			</div>
 
 		</div>
@@ -159,6 +172,45 @@
 </script>
 
 <style>
+	.search-form {
+		padding-top: 0.15rem;
+		margin: 0 -0.45rem;
+	}
+	
+	.search-form .input {
+		display: block;
+		width: 100%;
+		border: none;
+		border-radius: 0.3rem;
+		height: 0.6rem;
+		overflow: hidden;
+		background: #f7f7f7;
+		font-size: 0.24rem;
+		-webkit-box-align: center;
+		line-height: 0.6rem;
+		padding-left: 0.7rem;
+		padding-right: 0.2rem;
+		box-sizing: border-box;
+		position: relative;
+	}
+	
+	.search-form .icon-search {
+		display: block;
+		width: 0.36rem;
+		height: 0.3rem;
+		background: url(https://st.360buyimg.com/so/images/search/jd-sprites.png?__inline) no-repeat;
+		background-position: -80px 0;
+		background-size: 4rem;
+		position: absolute;
+		top:0.15rem;
+		left: 0.3rem;
+	}
+	.search-form a{
+		display: block;
+		line-height: 0.6rem;
+		font-size: 0.24rem;
+		color: #999999;
+	}
 	.container {
 		position: fixed;
 		top: 0;
