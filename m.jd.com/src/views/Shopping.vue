@@ -58,6 +58,10 @@
 		color: #333;
 	}
 	
+	.product-list{
+		padding: 0.2rem 0 1.5rem;
+	}
+	
 	.check-group {
 		width: 100%;
 		height: 1rem;
