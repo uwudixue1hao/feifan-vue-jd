@@ -3,27 +3,25 @@
 	<div class="shopping-product flex">
 
 		<div class="select">
-			<checkbox></checkbox>
+			<checkbox :arr="value" :value="id" @input="selectChange" ></checkbox>
 		</div>
 
 		<div class="product-image">
-
-			<img src="../assets/images/product3.jpg" />
+			<img :src="image" />
 		</div>
 
 		<div class="product-info flex-item">
 
-			<div class="product-title">回力帆布鞋女2019春季新款学生小白鞋百搭平底板鞋韩版潮鞋子 经典黑 低帮 37 [女生选小一码 男生标准码]</div>
+			<div class="product-title" v-text="title"></div>
 
 			<div class="clear">
 
-				<div class="product-price left">￥<span>12.25</span></div>
+				<div class="product-price left">￥<span v-text="price"></span></div>
 
 				<div class="product-count right">
-					<span>-</span>
-					<span>1</span>
-					<span>+</span>
-
+					<span @click="n = n<=1?1:--n;$emit('countChange',n);" >-</span>
+					<span v-text="n"></span>
+					<span @click="n++;$emit('countChange',n);">+</span>
 				</div>
 			</div>
 
@@ -37,10 +35,45 @@
 	import checkbox from "@/components/CheckBox";
 	export default {
 		data() {
-			return {}
+			return {
+				n:1
+			}
+		},
+		props: {
+			id: {
+				type: Number,
+				required: true
+			},
+			title: {
+				type: String
+			},
+			image: {
+				type: String
+			},
+			price:{
+				type:Number,
+				default:0
+			},
+			count: {
+				type: Number,
+				default:1
+			},
+			value:{
+				type:Array,
+				defalut:[]
+			}
+		},
+		methods:{
+			selectChange(val){
+				this.$emit('input',val);
+			}
 		},
 		components: {
 			checkbox
+		},
+		created(){
+			this.n = this.count;
+			
 		}
 	}
 </script>
@@ -97,7 +130,6 @@
 	}
 	
 	.shopping-product .product-price {
-		
 		color: #e93b3d;
 		font-size: 0.2rem;
 	}

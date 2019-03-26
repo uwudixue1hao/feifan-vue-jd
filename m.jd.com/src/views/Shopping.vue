@@ -10,8 +10,15 @@
 		
 		<div class="product-list">
 			
-			<shopping-product v-for="n in 10"></shopping-product>
+			<shopping-product v-for="(item,index) in products" 
+							:id="item.id"
+							:count="item.count"
+							:title="item.title"
+							:image="item.image"
+							:price="item.price"
+							v-model="selected"></shopping-product>
 			
+			<div>{{selected}}</div>
 			
 		</div>
 		
@@ -40,6 +47,12 @@
 			return {
 				sum: 0,
 				count: 0,
+				selected:[1,3],
+				products:[
+				{id:1,image:require("@/assets/images/product1.jpg"),title:'商品标题',price:12.32,count:1},
+				{id:2,image:require("@/assets/images/product1.jpg"),title:'商品标题',price:12.32,count:1},
+				{id:3,image:require("@/assets/images/product1.jpg"),title:'商品标题',price:12.32,count:1},
+				],
 			}
 		},
 		components: {
