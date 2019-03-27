@@ -6,6 +6,7 @@ import Pin from './views/Pin.vue'
 import Shopping from './views/Shopping.vue'
 
 import User from './views/User.vue'
+import Login from './views/Login.vue'
 import Product from './views/Product.vue'
 import UserInfo from './views/UserInfo.vue'
 import UserShop from './views/UserShop.vue'
@@ -25,11 +26,11 @@ export default new Router({
 			path: '/category',
 			name: 'category',
 			component: Category
-		},{
+		}, {
 			path: '/pin',
 			name: 'pin',
 			component: Pin
-		},{
+		}, {
 			path: '/shopping',
 			name: 'shopping',
 			component: Shopping
@@ -56,6 +57,11 @@ export default new Router({
 			path: '/product/:id',
 			name: 'product',
 			component: Product
+		},
+		{
+			path: '/login',
+			name: 'login',
+			component: Login
 		}
 	]
 })
