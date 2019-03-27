@@ -6,26 +6,22 @@
 			<div class="title">购物车</div>
 
 		</top-bar>
-		
-		
+
 		<div class="product-list">
-			
-			<shopping-product v-for="(item,index) in products" 
-							:id="item.id"
-							:count="item.count"
-							:title="item.title"
-							:image="item.image"
-							:price="item.price"
-							v-model="selected"></shopping-product>
-			
+
+			<shopping-product v-for="(item,index) in products" :id="item.id" :count="item.count" :title="item.title" :image="item.image" :price="item.price" v-model="selected" @countChange="countChange"></shopping-product>
+
 			<div>{{selected}}</div>
-			
+
+			<div>{{products}}</div>
+
+			<p>{{all}}</p>
+
 		</div>
-		
 
 		<div class="check-group flex">
 			<div class="select-all">
-				<checkbox></checkbox>
+				<checkbox v-model="all"></checkbox>
 				<span>全选</span>
 			</div>
 			<div class="total-price flex-item">
@@ -45,14 +41,88 @@
 	export default {
 		data() {
 			return {
-				sum: 0,
-				count: 0,
-				selected:[1,3],
-				products:[
-				{id:1,image:require("@/assets/images/product1.jpg"),title:'商品标题',price:12.32,count:1},
-				{id:2,image:require("@/assets/images/product1.jpg"),title:'商品标题',price:12.32,count:1},
-				{id:3,image:require("@/assets/images/product1.jpg"),title:'商品标题',price:12.32,count:1},
+				all: false,
+				selected: [1, 3],
+				products: [{
+						id: 1,
+						image: require("@/assets/images/product1.jpg"),
+						title: '商品标题',
+						price: 12,
+						count: 1
+					},
+					{
+						id: 2,
+						image: require("@/assets/images/product1.jpg"),
+						title: '商品标题',
+						price: 12.32,
+						count: 1
+					},
+					{
+						id: 3,
+						image: require("@/assets/images/product1.jpg"),
+						title: '商品标题',
+						price: 12.32,
+						count: 1
+					},
 				],
+			}
+		},
+		methods: {
+			countChange(id, n) {
+				this.products.forEach((item, index) => {
+					if(item.id == id) {
+						this.products[index].count = n;
+					}
+				});
+			}
+		},
+		watch: {
+
+			selected(val) {
+				if(val.length == this.products.length) {
+					this.all = true;
+				} else {
+					this.all = false;
+				}
+			},
+			all(val) {
+				if(val) {
+					this.selected = [];
+					// 全部的ID都要加入到selected。
+					this.products.forEach(item => {
+						this.selected.push(item.id);
+					});
+
+				} else if(this.selected.length == this.products.length){
+					this.selected = [];
+				}
+			},
+		},
+		//计算属性
+		computed: {
+			// 总数
+			count() {
+				let n = 0;
+				this.selected.forEach(item => {
+					this.products.forEach(pro => {
+						if(pro.id == item) {
+							n += pro.count;
+						}
+					});
+				});
+				return n;
+			},
+			// 总价
+			sum() {
+				let n = 0;
+				this.selected.forEach(item => {
+					this.products.forEach(pro => {
+						if(pro.id == item) {
+							n += pro.count * pro.price;
+						}
+					});
+				});
+				return n.toFixed(2);
 			}
 		},
 		components: {
@@ -71,7 +141,7 @@
 		color: #333;
 	}
 	
-	.product-list{
+	.product-list {
 		padding: 0.2rem 0 1.5rem;
 	}
 	

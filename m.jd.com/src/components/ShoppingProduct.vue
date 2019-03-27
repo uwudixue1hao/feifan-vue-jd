@@ -11,17 +11,13 @@
 		</div>
 
 		<div class="product-info flex-item">
-
 			<div class="product-title" v-text="title"></div>
-
 			<div class="clear">
-
 				<div class="product-price left">￥<span v-text="price"></span></div>
-
 				<div class="product-count right">
 					<span @click="n = n<=1?1:--n;$emit('countChange',n);" >-</span>
 					<span v-text="n"></span>
-					<span @click="n++;$emit('countChange',n);">+</span>
+					<span @click="n++;$emit('countChange',id,n);">+</span>
 				</div>
 			</div>
 
