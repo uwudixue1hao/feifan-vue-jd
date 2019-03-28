@@ -38,9 +38,11 @@
 			
 				
 				if(this.user=='admin'&&this.pwd =="admin"){
+					// 调用登录状态修改的函数
+					this.$store.commit('setLoginState',true);
 //					this.$router.push('/user');
 					this.$router.push({path:'/user'});
-					this.$router.push({name:user});
+//					this.$router.push({name:user});
 
 				}else{
 					alert("用户名或密码错误！");

@@ -9,7 +9,7 @@
 			<input type="" name="" id="" value="" />
 		</div>
 		<div class="login">
-			登录
+			<span @click="$router.push('/login');">登录</span> 
 		</div>
 	</div>
 

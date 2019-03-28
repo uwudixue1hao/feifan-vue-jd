@@ -2,8 +2,8 @@
 
 	<div class="tab-bar-bottom">
 		<ul class="clear">
-			<li :class="{active:navIndex==index}"  v-for="(item,index) in nav" :key="index">
-				<router-link :to="{name:item.name,params:{index:index}}">
+			<li :class="{active:navIndex==index}" v-for="(item,index) in nav" :key="index">
+				<router-link :to="{name:item.name}">
 					<span class="iconfont" :class="item.icon"></span>
 					<div class="title" v-text="item.title"></div>
 				</router-link>
@@ -17,7 +17,7 @@
 	export default {
 		data() {
 			return {
-				navIndex:0,
+				navIndex: 0,
 				nav: [{
 						icon: 'iconfont icon-home',
 						title: '首页',
@@ -46,8 +46,36 @@
 				]
 			}
 		},
-		created(){
-			this.navIndex = this.$route.params.index>0?this.$route.params.index:0;
+		props:{
+			index:{
+				type:Number,
+				default:0
+			}
+		},
+		created() {
+			this.navIndex = this.index;
+		},
+		computed: {
+			// 获取登录状态
+			isLogin() {
+				return this.$store.state.isLogin;
+			}
+		},
+		mounted() {
+			if(this.isLogin) {
+				this.nav[4].title = "我的";
+			} else {
+				this.nav[4].title = "未登录";
+			}
+		},
+		watch: {
+			isLogin(val) {
+				if(val) {
+					this.nav[4].title = "我的";
+				} else {
+					this.nav[4].title = "未登录";
+				}
+			}
 		}
 	}
 </script>
@@ -81,24 +109,19 @@
 		text-align: center;
 	}
 	
-	.tab-bar-bottom a{
+	.tab-bar-bottom a {
 		color: #7e7f88;
 	}
 	
-	.tab-bar-bottom .active a{
+	.tab-bar-bottom .active a {
 		color: #f23030;
 	}
 	
 	.tab-bar-bottom span.iconfont {
 		font-size: 0.50rem;
-		
 	}
 	
 	.tab-bar-bottom .title {
 		font-size: 0.18rem;
-		
 	}
-	
-	
-	
 </style>

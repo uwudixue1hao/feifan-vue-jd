@@ -16,7 +16,7 @@
 
 		</div>
 		
-		<tab-bar></tab-bar>
+		<tab-bar :index="0"></tab-bar>
 		
 		<div style="height: 1000px;"></div>
 	</div>

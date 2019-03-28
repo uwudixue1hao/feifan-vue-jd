@@ -33,7 +33,7 @@
 
 		</div>
 
-		<tab-bar></tab-bar>
+		<tab-bar :index="1"></tab-bar>
 	</div>
 
 </template>

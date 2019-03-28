@@ -3,9 +3,10 @@
 	<div id="user">
 		<h1>个人中心</h1>
 		
+		
+		{{$store.state.isLogin}}
+		
 		<router-view></router-view>
-		
-		
 		<div>
 			<!--
 				1. 直接放入路径
@@ -26,7 +27,7 @@
 		<button @click="$router.push({name:'shop',params:{id:1},query:{user:'admin'} })">店铺</button>
 		<button @click="$router.push({path:'/user/like',params:{id:1},query:{user:'admin'} });">喜欢</button>
 			
-		<tab-bar></tab-bar>
+		<tab-bar :index="4"></tab-bar>
 	</div>
 	
 </template>
@@ -35,8 +36,16 @@
 	
 	import TabBar from "@/components/TabBar.vue";
 	export default{
-		
-		
+		computed:{
+			isLogin(){
+				return this.$store.state.isLogin;
+			}
+		},
+		created(){
+			if(!this.isLogin){
+				this.$router.push("/login");
+			}
+		},
 		components:{
 			TabBar
 		}

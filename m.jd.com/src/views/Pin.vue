@@ -3,7 +3,7 @@
 	<div>
 		
 		<h1>拼购</h1>
-		<tab-bar></tab-bar>
+		<tab-bar :index="2"></tab-bar>
 	</div>
 	
 </template>
