@@ -9,7 +9,8 @@
 			<input type="" name="" id="" value="" />
 		</div>
 		<div class="login">
-			<span @click="$router.push('/login');">登录</span> 
+			<span v-if="!isLogin" @click="$router.push('/login');">登录</span>
+			<span v-if="isLogin" @click="$router.push('/user');" class="icon-user"></span>
 		</div>
 	</div>
 
@@ -47,6 +48,11 @@
 					this.isFixed = false;
 				}
 			}
+		},
+		computed: {
+			isLogin() {
+				return this.$store.state.isLogin;
+			}
 		}
 	}
 </script>
@@ -67,6 +73,19 @@
 	.search-bar .login {
 		width: 1rem;
 		height: 0.88rem;
+	}
+	
+	.search-bar .login .icon-user {
+		display: inline-block;
+		margin: 0.2rem 0.24rem 0.24rem 0.2rem;
+		width: 0.4rem;
+		height: 0.44rem;
+		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsCAMAAAAgsQpJAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAA/UExURUdwTP///////////////////////////////////////////////////////////////////////////////0qNmhgAAAAUdFJOUwCdyNsFrueAG/RrkE8OKTR4XEK97eDRGAAAAWlJREFUOMuNVUkCgyAMFJFdRZb/v7UJtlYkqLm0DUOWyZAOQ2Or3YIenmyyPKOJeI+zMv9s9H3YIhBhhBvLp+2mxXNuF6zTGfi+dYAMztz0/aHx1kziZjg5ZZsSZF8oIIRgVcWcTu4hQE1fyFkSwO0SEJIDV2sLBGrCswuMt9chiXsFtCQQmo4tkDW4QPCLPk/0Iq/i0pJgcqzGctMN+HijEk7wo4kaoRkzUdoZa68GqamWnsaN8uSUfNQlOcoz9gRu1upeR+JI28Gly9RYfpI0xyHKXUzdZxgP9adbXJHQPlxas+fnkPUvIuuvkwA1in+NiY6pFa6Tqus8hobwWLZJ5jWP0JurtOfLsslSnQN4YYqX/aElTU7zlY9l34FmPg3VMLrymPIxcotD6K/YyL8truaOMixA7gDRCJYYLIxJU0+yfaEK3256+geYEUPvl0YCI6KlejDUXNmrLwyY9PIFzu2DekqtYIYfJmsgn/YUC8kAAAAASUVORK5CYII=) no-repeat 50%;
+		background-size: 0.4rem;
+	}
+	
+	.search-bar .login .icon-user:before {
+		content: "";
 	}
 	
 	.search-bar .category .icon {
