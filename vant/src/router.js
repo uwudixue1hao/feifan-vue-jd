@@ -6,6 +6,8 @@ import Course from './views/Course.vue'
 import Goods from './views/Goods.vue'
 import User from './views/User.vue'
 import Learn from './views/Learn.vue'
+import Shopping from './views/Shopping.vue'
+import Tcl from './views/TeacherCourseList.vue'
 
 Vue.use(Router)
 
@@ -36,5 +38,13 @@ export default new Router({
 		path: '/button',
 		name: 'button',
 		component: Button
+	}, {
+		path: '/shopping',
+		name: 'shopping',
+		component: Shopping
+	},{
+		path: '/teacher/course',
+		name: 'teacherCourse',
+		component: Tcl
 	}]
 })
