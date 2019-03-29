@@ -8,7 +8,8 @@ import User from './views/User.vue'
 import Learn from './views/Learn.vue'
 import Shopping from './views/Shopping.vue'
 import Tcl from './views/TeacherCourseList.vue'
-
+import StudentCourseList from './views/StudentCourseList.vue'
+import Leave from './views/Leave.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -46,5 +47,13 @@ export default new Router({
 		path: '/teacher/course',
 		name: 'teacherCourse',
 		component: Tcl
+	},{
+		path: '/teacher/course/student',
+		name: 'StudentCourseList',
+		component: StudentCourseList
+	},{
+		path: '/student/leave',
+		name: 'studentLeave',
+		component: Leave
 	}]
 })
