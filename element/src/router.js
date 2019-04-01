@@ -6,6 +6,7 @@ import Button from './views/Button.vue'
 import Radio from './views/Radio.vue'
 import CheckBox from './views/CheckBox.vue'
 import Input from './views/Input.vue'
+import Login from './views/Login.vue'
 
 Vue.use(Router)
 
@@ -24,18 +25,22 @@ export default new Router({
 			path: 'button',
 			name: 'button',
 			component: Button
-		},{
+		}, {
 			path: 'radio',
 			name: 'radio',
 			component: Radio
-		},{
+		}, {
 			path: 'checkbox',
 			name: 'checkbox',
 			component: CheckBox
-		},{
+		}, {
 			path: 'input',
 			name: 'input',
 			component: Input
 		}]
-	}]
+	}, {
+		path: '/login',
+		name: 'login',
+		component: Login
+	}, ]
 })
