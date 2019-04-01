@@ -1,7 +1,7 @@
 <template>
 
 	<el-container id="admin" >
-		<el-aside width="200px" style="background-color: red;">
+		<el-aside width="200px">
 			<Aside/>
 		</el-aside>
 		<el-container>
@@ -17,7 +17,11 @@
 
 <script>
 	import Aside from "@/components/Aside";
-	
+	export default{
+		components:{
+			Aside
+		}
+	}
 	
 </script>
 
@@ -26,5 +30,8 @@
 	#admin{
 		height: 100%;
 	}
-
+	
+	#admin .el-aside{
+		background-color: #20222A;
+	}
 </style>
