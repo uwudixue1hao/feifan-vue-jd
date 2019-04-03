@@ -7,6 +7,10 @@ import Radio from './views/Radio.vue'
 import CheckBox from './views/CheckBox.vue'
 import Input from './views/Input.vue'
 import Login from './views/Login.vue'
+import Student from './views/Student.vue'
+import Select from './views/Select.vue'
+import Cascader from './views/Cascader.vue'
+import Switch from './views/Switch.vue'
 
 Vue.use(Router)
 
@@ -37,6 +41,22 @@ export default new Router({
 			path: 'input',
 			name: 'input',
 			component: Input
+		}, {
+			path: 'student',
+			name: 'student',
+			component: Student
+		}, {
+			path: 'select',
+			name: 'select',
+			component: Select
+		},{
+			path:'cascader',
+			name:'cascader',
+			component:Cascader
+		},{
+			path:'switch',
+			name:'switch',
+			component:Switch
 		}]
 	}, {
 		path: '/login',

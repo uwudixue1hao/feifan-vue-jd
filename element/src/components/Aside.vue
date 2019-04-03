@@ -58,6 +58,18 @@
 						title: '输入框',
 						icon: 'el-icon-circle-plus-outline',
 						url: '/admin/input'
+					}, {
+						title: '下拉选择',
+						icon: 'el-icon-circle-plus-outline',
+						url: '/admin/select'
+					}, {
+						title: '级联选择',
+						icon: 'el-icon-circle-plus-outline',
+						url: '/admin/cascader'
+					}, {
+						title: '开关选择',
+						icon: 'el-icon-circle-plus-outline',
+						url: '/admin/switch'
 					}]
 				},{
 					title: '学生管理',
@@ -65,7 +77,7 @@
 					submenu: [{
 						title: '学生管理',
 						icon: 'el-icon-circle-plus-outline',
-						url: ''
+						url: '/admin/student'
 					}, {
 						title: '打卡管理',
 						icon: 'el-icon-circle-plus-outline',
