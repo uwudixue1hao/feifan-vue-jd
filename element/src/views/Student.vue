@@ -19,13 +19,12 @@
 			3. 选择时间
 			4. 添加学生到这个排课下面
 			5. 要用到table 列出所有的排课
-		
 	-->
 
 	<el-card class="box-card">
 		<div slot="header" class="clearfix">
 			<span>学生管理</span>
-			<el-button style="float: right; padding: 3px 0" type="text">+ 新增</el-button>
+			<el-button style="float: right; padding: 3px 0" type="text" @click="addStudentDialog = true">+ 新增</el-button>
 		</div>
 		<el-table :data="student" size="small" stripe border :row-class-name="tableRowClassName" style="width: 100%" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55" fixed> </el-table-column>
@@ -50,8 +49,67 @@
 		<div class="pages" style="margin-top: 20px; text-align: center;">
 			<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current" :page-sizes="[5,10,20]" :page-size="size" layout="total, sizes, prev, pager, next, jumper" :total="total">
 			</el-pagination>
-
 		</div>
+
+		<el-dialog title="添加学生" :visible.sync="addStudentDialog" width="500px" :before-close="handleClose">
+
+			<el-form ref="form" :model="form" label-width="80px">
+
+				<el-row :gutter="0">
+					<el-col :span="12">
+						<el-form-item prop="name" label="姓名" :rules="[{ required: true, message: '请输入用户名', trigger: 'blur' }]">
+							<el-input v-model="form.name"></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="12">
+						<el-form-item prop="sex" label="性别">
+							<el-radio-group v-model="form.sex">
+								<el-radio label="男" value='0'></el-radio>
+								<el-radio label="女" value='1'></el-radio>
+							</el-radio-group>
+						</el-form-item>
+					</el-col>
+				</el-row>
+
+				<el-row :gutter="0">
+					<el-col :span="12">
+						<el-form-item prop="phone" label="手机号" :rules="checkPhoneRule">
+							<el-input v-model="form.phone" ></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="12">
+						<el-form-item prop="course" label="课程">
+							<el-select v-model="form.course" placeholder="请选择课程">
+								<el-option v-for="(item,index) in courses" :label="item.label" :value="item.value" :key="index"></el-option>
+							</el-select>
+						</el-form-item>
+					</el-col>
+				</el-row>
+
+				<el-row :gutter="0">
+					<el-col :span="24">
+						<el-form-item prop="address" label="省市区县">
+							<el-cascader style="width:100%" :options="region" v-model="form.address">
+							</el-cascader>
+						</el-form-item>
+					</el-col>
+
+					<el-col :span="24">
+						<el-form-item prop="street" label="详细地址">
+							<el-input type="textarea" v-model="form.street"></el-input>
+						</el-form-item>
+					</el-col>
+
+				</el-row>
+
+				<el-form-item>
+					<el-button type="primary" @click="submitForm('form');">添加</el-button>
+					<el-button @click="resetForm('form');">取消</el-button>
+				</el-form-item>
+
+			</el-form>
+
+		</el-dialog>
 
 	</el-card>
 
@@ -59,17 +117,75 @@
 
 <script>
 	import db from "@/assets/js/student";
-
+	import region from "@/assets/js/region.json";
 	export default {
 		data() {
+			var checkPhone = (rule, value, callback) => {
+				if(value === '') {
+					callback(new Error('请输入手机号'));
+				} else {
+					if(/^1[3578]\d{9}$/.test(value)){
+						callback();
+					}else{
+						callback(new Error('手机号格式错误！'));
+					}
+				}
+			};
+
 			return {
+				checkPhoneRule: [{
+					required: true,
+					validator: checkPhone,
+					trigger: 'blur'
+				}],
+				form: {
+					name: '',
+					sex: 0,
+					phone: '',
+					course: 0,
+					address: [1, 1, 1],
+					satreet: ''
+				},
+				region: [],
+				courses: [{
+					label: '网页前端',
+					value: '1'
+				}, {
+					label: '室内',
+					value: '2'
+				}, {
+					label: 'UI',
+					value: '3'
+				}, {
+					label: '模具',
+					value: '4'
+				}],
 				current: 1,
 				size: 10,
 				total: 0,
 				student: [],
+				addStudentDialog: false
 			}
 		},
 		methods: {
+
+			handleClose() {
+				this.addStudentDialog = false;
+			},
+			submitForm(formName) {
+				this.$refs[formName].validate((valid) => {
+					if(valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+
+			resetForm(formName) {
+				this.$refs[formName].resetFields();
+			},
 			handleSizeChange(val) {
 				this.size = val;
 				let res = db.getStudent(this.size, this.current);
@@ -109,6 +225,7 @@
 			let res = db.getStudent(10, 2);
 			this.total = res.total;
 			this.student = res.result;
+			this.region = region;
 			console.log(res);
 		}
 	}
