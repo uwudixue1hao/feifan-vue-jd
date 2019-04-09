@@ -1,0 +1,20 @@
+.tab-bar{
+	height: 50px;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	background-color: blue;
+	color: white;
+}
+.tab-bar ul{
+	margin: 0;
+	padding: 0;
+	line-height: 50px;
+	list-style: none;
+	text-align: center;
+}
+.tab-bar ul li{
+	float: left;
+	width: 20%;
+}
