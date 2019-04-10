@@ -1,12 +1,10 @@
 // 引入 react 和组件 类
 import  React ,{ Component } from "react";
 import TabBar from "../components/TabBar";
-import SearchBar from "../components/SearchBar";
-import Swiper from "../components/Swiper";
 
 
 // 创建一个Home的类 并集成component 
-export default class Home extends Component{
+export default class User extends Component{
 	
 	// 构造函数
 	constructor(props){
@@ -16,14 +14,12 @@ export default class Home extends Component{
 	}
 	
 	
+	
 	// 渲染
 	render(){
-		return (<div id="home">
-					<SearchBar/>
-					<Swiper/>
-					<div style={{height:'1000px'}}></div>	
-					
-					<TabBar index={0} />
+		return (<div> 
+					<h1>User</h1>
+					<TabBar index={4} />
 				</div>);
 	}
 	
