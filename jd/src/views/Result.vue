@@ -9,8 +9,8 @@
 		</top-bar>
 
 		<div class="sort-option flex">
-			<div class="sort-item flex-item">
-				<span>综合<i class="arrow"></i></span>
+			<div class="sort-item flex-item" @click="optionShow=optionShow==0?1:0">
+				<span :style="{color:sortIndex>-1?'#e93b3d':'#333'}" >{{sort[sortIndex<0?0:sortIndex]}}<i class="arrow"></i></span>
 			</div>
 			<div class="sort-item  flex-item">
 				<span>销量</span>
@@ -18,10 +18,28 @@
 			<div class="sort-item  flex-item">
 				<span>服务<i class="arrow"></i></span>
 			</div>
-			<div class="sort-item  flex-item">
+			<div class="sort-item  flex-item" @click="optionShow=4">
 				<span>筛选<i class="filter"></i></span>
 			</div>
+			<div class="option-group">
+				<div class="sort" v-show="optionShow==1">
+					<ul>
+						<li :class="{active:index==sortIndex}" v-for="(item,index) in sort" v-text="item" :key="index" @click="sortIndex=index;optionShow=0;"></li>
+					</ul>
+				</div>
+				<div class="sale-count"></div>
+				<div class="service" v-show="optionShow==3"></div>
+				<div class="filter" style="z-index: 1;" :class="{active:optionShow==4}">
+					
+				</div>
+				<div class="mask" @click.stop="optionShow=0" v-show="optionShow==4" style="z-index: 0;"></div>
+			</div>
+			<div class="mask" @click.stop="optionShow=0" v-show="optionShow>0&&optionShow!=4"></div>
 		</div>
+		
+		<div style="height: 2rem;"></div>
+		
+		<search-product v-for="(item,index) in products" :price="item.product_price" :id="item.id" :image="'http://api.niyinlong.com'+item.product_thumb" :title="item.product_title"></search-product>
 		
 	</div>
 
@@ -29,18 +47,36 @@
 
 <script>
 	import TopBar from "@/components/TopBar";
-
+	import SearchProduct from "@/components/SearchProduct";
+	import axios from "axios";
+	import qs from "qs";
 	export default {
 		data() {
 			return {
-				search: ''
+				search: '',
+				sortIndex:-1,
+				sort:['综合','最新上架','价格最低','价格最高','评价最多'],
+				optionShow:0,
+				products:[]
+			}
+		},
+		methods:{
+			searchProduct(){
+				axios
+				.post('http://api.niyinlong.com/api/product/searchProduct',qs.stringify({keyword:this.search}))
+				.then(res=>{
+					this.products = res.data;
+				})
+				.catch();
 			}
 		},
 		components: {
-			TopBar
+			TopBar,
+			SearchProduct
 		},
 		created() {
 			this.search = this.$route.query.search ? this.$route.query.search : '';
+			this.searchProduct();
 		}
 	}
 </script>
@@ -79,14 +115,17 @@
 		.sort-option {
 			width: 100%;
 			position: fixed;
+			z-index: 9999;
 			top: 0.9rem;
 			left: 0;
 			height: 0.8rem;
-			border: solid 1px #e5e5e5;
+			border-bottom: solid 1px #e5e5e5;
+			color: #333333;
+			line-height: 0.8rem;
 			.sort-item {
+				background-color: #FFFFFF;
 				text-align: center;
-				color: #333333;
-				line-height: 0.8rem;
+				
 				span {
 					position: relative;
 				}
@@ -111,6 +150,47 @@
 					background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaBAMAAABbZFH9AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURUdwTMzMzM7OzszMzNDQ0MfHx8zMzDEar9oAAAAGdFJOUwDTFcQWF87ZqzkAAABeSURBVBjTYzBLQ4BkBlSeYmIAAwSwigkxMImJQnmBiQoMcEmQFANQUgQhBZJ0AJIsYCmYpCNECiIJkwJJGjAww6QYGNQSGNiSYBwGtgQQoi6P2QCZB5GmMQ9oJRAAANAtGtSzNppcAAAAAElFTkSuQmCC) no-repeat;
 					background-size: contain;
 				}
+			}
+			
+			.option-group{
+				position: absolute;
+				top: 0.8rem;
+				width: 100%;
+				background-color: #FFFFFF;
+				ul{
+					border-top: solid 1px #e5e5e5;
+				}
+				
+				li{
+					padding-left: 0.2rem;
+					border-bottom: solid 1px #e5e5e5;
+					
+					&.active{
+						color: #e93b3d;
+					}
+				}
+				.filter{
+					position: fixed;
+					top: 0;
+					right:-85%;
+					bottom: 0;
+					background-color: red;
+					width: 85%;
+					transition: right 0.3s linear;
+					&.active{
+						right: 0;
+					}
+				}
+			}
+			
+			.mask{
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: -99;
+				background-color: rgba(0,0,0,.3);
 			}
 		}
 	}

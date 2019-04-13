@@ -16,6 +16,7 @@
 			</template>
 
 		</top-bar>
+		<!-- http://api.niyinlong.com/api/product/searchHotWord-->
 
 		<!--热门搜索-->
 		<div class="hot-word">
