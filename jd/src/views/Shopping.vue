@@ -1,6 +1,6 @@
 <template>
 	<div id="shopping-cart">
-		<top-bar>
+		<top-bar shortcut>
 			<div class="title">购物车</div>
 		</top-bar>
 		<div style="height: 1rem;"></div>
