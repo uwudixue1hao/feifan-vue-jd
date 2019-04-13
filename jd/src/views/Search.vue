@@ -28,7 +28,7 @@
 		<div class="recommend-word" v-show="search.length>0">
 			<!-- 推荐的词 -->
 			<ul>
-				<li class="clear" v-for="n in 10"> 手机 <span class="tag right">华为</span> <span class="tag right">华为</span> <span class="tag right">华为</span> </li>
+				<li class="clear" v-for="n in 10">手机 <span class="tag right">华为</span> <span class="tag right">华为</span> <span class="tag right">华为</span> </li>
 			</ul>
 
 		</div>

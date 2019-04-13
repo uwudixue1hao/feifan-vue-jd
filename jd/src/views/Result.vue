@@ -1,5 +1,5 @@
 <template>
-	
+<!--搜索结果类表页面-->
 	<div id="search-result">
 		<top-bar shortcut>
 			<div class="search-form">
@@ -7,35 +7,46 @@
 				<input type="text" v-model="search" placeholder="请输入搜索内容" @focus="$router.push({path:'/search',query:{search:search}});" />
 			</div>
 		</top-bar>
-		
-		{{$route.query.key}}
+
+		<div class="sort-option flex">
+			<div class="sort-item flex-item">
+				<span>综合<i class="arrow"></i></span>
+			</div>
+			<div class="sort-item  flex-item">
+				<span>销量</span>
+			</div>
+			<div class="sort-item  flex-item">
+				<span>服务<i class="arrow"></i></span>
+			</div>
+			<div class="sort-item  flex-item">
+				<span>筛选<i class="filter"></i></span>
+			</div>
+		</div>
 		
 	</div>
-	
+
 </template>
 
 <script>
-	
 	import TopBar from "@/components/TopBar";
-	
-	export default{
-		data(){
+
+	export default {
+		data() {
 			return {
-				search:''
+				search: ''
 			}
 		},
-		components:{
+		components: {
 			TopBar
 		},
-		created(){
-			this.search = this.$route.query.search?this.$route.query.search:'';
+		created() {
+			this.search = this.$route.query.search ? this.$route.query.search : '';
 		}
 	}
-	
 </script>
 
 <style lang="less">
-	#search-result{
+	#search-result {
 		.search-form {
 			position: relative;
 			padding: 0.15rem 0.2rem 0 0.2rem;
@@ -63,6 +74,43 @@
 				border: none;
 				width: 100%;
 				box-sizing: border-box;
+			}
+		}
+		.sort-option {
+			width: 100%;
+			position: fixed;
+			top: 0.9rem;
+			left: 0;
+			height: 0.8rem;
+			border: solid 1px #e5e5e5;
+			.sort-item {
+				text-align: center;
+				color: #333333;
+				line-height: 0.8rem;
+				span {
+					position: relative;
+				}
+				.arrow {
+					position: absolute;
+					right: -0.2rem;
+					top: 50%;
+					background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKBAMAAABPkMOvAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAkUExURUdwTMzMzMzMzMzMzMzMzM3NzdLS0svLy6qqqszMzMzMzMzMzGC86tIAAAALdFJOUwDl9UGdJhG9A2jOR0lNjwAAAEdJREFUCNdj8N4NBlsYVkMYuxgCIQxRBmZtEL3JgIFhNoixk4GBgQXEcAAyOKp3797eAGQwJO7eLQaiGVi1NwWAGQyGwkACAKGfIfA79uAMAAAAAElFTkSuQmCC) no-repeat;
+					background-size: contain;
+					margin-top: -1px;
+					width: 0.16rem;
+					height: 0.1rem;
+				}
+				.filter {
+					position: absolute;
+					top: 50%;
+					right: -0.3rem;
+					margin-top: -0.13rem;
+					display: inline-block;
+					width: 0.26rem;
+					height: 0.26rem;
+					background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaBAMAAABbZFH9AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURUdwTMzMzM7OzszMzNDQ0MfHx8zMzDEar9oAAAAGdFJOUwDTFcQWF87ZqzkAAABeSURBVBjTYzBLQ4BkBlSeYmIAAwSwigkxMImJQnmBiQoMcEmQFANQUgQhBZJ0AJIsYCmYpCNECiIJkwJJGjAww6QYGNQSGNiSYBwGtgQQoi6P2QCZB5GmMQ9oJRAAANAtGtSzNppcAAAAAElFTkSuQmCC) no-repeat;
+					background-size: contain;
+				}
 			}
 		}
 	}
