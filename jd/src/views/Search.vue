@@ -11,7 +11,7 @@
 
 			<template v-slot:right>
 				<div class="search-btn" v-show="!shortcut">
-					<span>搜索</span>
+					<span @click="$router.push({path:'/result',query:{search:search}});"  >搜索</span>
 				</div>
 			</template>
 
@@ -51,6 +51,9 @@
 		components: {
 			TabBar,
 			TopBar
+		},
+		created(){
+			this.search = this.$route.query.search?this.$route.query.search:'';
 		}
 	}
 </script>
